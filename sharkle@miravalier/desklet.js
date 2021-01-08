@@ -142,8 +142,8 @@ Sharkle.prototype = {
         try
         {
             this.settings = new Settings.DeskletSettings(this, this.metadata["uuid"], this.instance_id);
-            this.settings.bind("color", "color", this.on_setting_changed);
-            this.settings.bind("size", "size", this.on_setting_changed);
+            this.settings.bind("color", "setting_color", this.on_setting_changed);
+            this.settings.bind("size", "setting_size", this.on_setting_changed);
         }
         catch(e)
         {
@@ -152,7 +152,7 @@ Sharkle.prototype = {
         
         // Setup main content
         this.mainContent = new Clutter.Group();
-        this.mainContent.set_size(this.size, this.size);
+        this.mainContent.set_size(this.setting_size, this.setting_size);
         this.setContent(this.mainContent);
         
         //load animations
@@ -192,16 +192,16 @@ Sharkle.prototype = {
         
         // Setup the shark
         this.shark = createSprite();
-        this.shark.set_size(this.size, this.size);
-        this.shark.setAnimation(this.animStash['white'].idle);
-        
+        this.shark.set_size(this.setting_size, this.setting_size);
+        this.shark.setAnimation(this.animStash[this.setting_color].idle);
+
         this.mainContent.add_actor(this.shark);
         
         //Setup the word bubble
         this.wordBubble = createSprite();
-        this.wordBubble.set_size(this.size, this.size);
-        this.wordBubble.anchor_x = (this.size*0.63);
-        this.wordBubble.anchor_y = (this.size*0.63);
+        this.wordBubble.set_size(this.setting_size, this.setting_size);
+        this.wordBubble.anchor_x = (this.setting_size*0.63);
+        this.wordBubble.anchor_y = (this.setting_size*0.63);
         
         this.mainContent.add_actor(this.wordBubble);
     },
@@ -245,12 +245,12 @@ Sharkle.prototype = {
         if(!this.wavingHello)
         {
             this.wavingHello = true;
-            this.shark.setAnimation(this.animStash['white'].hello);
-            this.wordBubble.setAnimation(this.animStash['white'].bubble);
+            this.shark.setAnimation(this.animStash[this.setting_color].hello);
+            this.wordBubble.setAnimation(this.animStash[this.setting_color].bubble);
             this.playRandomGreeting();
             var _this = this;
             Mainloop.timeout_add(1600, function(){
-                _this.shark.setAnimation(_this.animStash['white'].idle);
+                _this.shark.setAnimation(_this.animStash[_this.setting_color].idle);
                 _this.wordBubble.setAnimation(null);
                 _this.wavingHello = false;
             });
@@ -258,19 +258,19 @@ Sharkle.prototype = {
     },
     
     on_setting_changed: function(){
-        this.mainContent.set_size(this.size, this.size);
-        this.shark.set_size(this.size, this.size);
-        this.wordBubble.set_size(this.size, this.size);
-        this.wordBubble.anchor_x = (this.size*0.63);
-        this.wordBubble.anchor_y = (this.size*0.63);
+        this.mainContent.set_size(this.setting_size, this.setting_size);
+        this.shark.set_size(this.setting_size, this.setting_size);
+        this.wordBubble.set_size(this.setting_size, this.setting_size);
+        this.wordBubble.anchor_x = (this.setting_size*0.63);
+        this.wordBubble.anchor_y = (this.setting_size*0.63);
         if(this.wavingHello)
         {
-            this.shark.setAnimation(this.animStash['white'].hello);
-            this.wordBubble.setAnimation(this.animStash['white'].bubble);
+            this.shark.setAnimation(this.animStash[this.setting_color].hello);
+            this.wordBubble.setAnimation(this.animStash[this.setting_color].bubble);
         }
         else
         {
-            this.shark.setAnimation(this.animStash['white'].idle);
+            this.shark.setAnimation(this.animStash[this.setting_color].idle);
             this.wordBubble.setAnimation(null);
         }
     },
