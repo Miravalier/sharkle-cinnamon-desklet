@@ -1,7 +1,13 @@
 # Sharkle Desklet
-The Sharkle desklet from the video game **Night In The Woods** for Cinnamon desktop
+The Sharkle desklet from the video game **Night In The Woods** for Cinnamon desktop.
 
-![alt tag](https://raw.githubusercontent.com/lufinkey/sharkle-cinnamon-desklet/master/preview.gif)
+![alt tag](https://raw.githubusercontent.com/Miravalier/sharkle-cinnamon-desklet/master/preview.gif)
+
+## Credits
+This project is a fork of [lufinkey](https://github.com/lufinkey/sharkle-cinnamon-desklet)'s project of the same name.
+
+This fork adds a size slider and full color palette.
+
 
 ## Install
 
@@ -10,7 +16,7 @@ In order to use this desklet, you need to be using the Cinnamon desktop environm
 Once you've installed Cinnamon and have booted into the Cinnamon desktop environment, open a terminal and run the following commands:
 
 ``` bash
-git clone https://github.com/lufinkey/sharkle-cinnamon-desklet
+git clone https://github.com/Miravalier/sharkle-cinnamon-desklet
 cd sharkle-cinnamon-desklet
 ./install.sh
 ```

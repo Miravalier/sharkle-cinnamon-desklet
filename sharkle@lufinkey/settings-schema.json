@@ -1,11 +1,20 @@
 {
-	"color": {
-		"type": "combobox",
-		"description": "Color",
-		"default": "white",
-		"options": {
-			"White": "white",
-			"Black": "black"
-		}
-	}
+    "color": {
+        "type": "combobox",
+        "description": "Color",
+        "default": "white",
+        "options": {
+            "White": "white",
+            "Black": "black"
+        }
+    },
+    "size": {
+        "type": "scale",
+        "description": "Size",
+        "default": 200,
+        "min": 10,
+        "max": 400,
+        "step": 10,
+        "units": "px"
+    }
 }
