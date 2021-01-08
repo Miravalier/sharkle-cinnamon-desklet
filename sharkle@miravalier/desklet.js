@@ -134,8 +134,6 @@ Sharkle.prototype = {
         Desklet.Desklet.prototype._init.call(this, metadata, desklet_id);
         this.metadata = metadata;
         
-        this.width = this.size;
-        this.height = this.size;
         this.wavingHello = false;
         this.soundManager = new Sound.SoundManager();
         this.lastGreetingNum = -1;
@@ -154,7 +152,7 @@ Sharkle.prototype = {
         
         // Setup main content
         this.mainContent = new Clutter.Group();
-        this.mainContent.set_size(this.width, this.height);
+        this.mainContent.set_size(this.size, this.size);
         this.setContent(this.mainContent);
         
         //load animations
@@ -194,16 +192,16 @@ Sharkle.prototype = {
         
         // Setup the shark
         this.shark = createSprite();
-        this.shark.set_size(this.width, this.height);
-        this.shark.setAnimation(this.animStash[this.color].idle);
+        this.shark.set_size(this.size, this.size);
+        this.shark.setAnimation(this.animStash['white'].idle);
         
         this.mainContent.add_actor(this.shark);
         
         //Setup the word bubble
         this.wordBubble = createSprite();
-        this.wordBubble.set_size(this.width, this.height);
-        this.wordBubble.anchor_x = (this.width*0.63);
-        this.wordBubble.anchor_y = (this.height*0.63);
+        this.wordBubble.set_size(this.size, this.size);
+        this.wordBubble.anchor_x = (this.size*0.63);
+        this.wordBubble.anchor_y = (this.size*0.63);
         
         this.mainContent.add_actor(this.wordBubble);
     },
@@ -247,12 +245,12 @@ Sharkle.prototype = {
         if(!this.wavingHello)
         {
             this.wavingHello = true;
-            this.shark.setAnimation(this.animStash[this.color].hello);
-            this.wordBubble.setAnimation(this.animStash[this.color].bubble);
+            this.shark.setAnimation(this.animStash['white'].hello);
+            this.wordBubble.setAnimation(this.animStash['white'].bubble);
             this.playRandomGreeting();
             var _this = this;
             Mainloop.timeout_add(1600, function(){
-                _this.shark.setAnimation(_this.animStash[_this.color].idle);
+                _this.shark.setAnimation(_this.animStash['white'].idle);
                 _this.wordBubble.setAnimation(null);
                 _this.wavingHello = false;
             });
@@ -260,21 +258,19 @@ Sharkle.prototype = {
     },
     
     on_setting_changed: function(){
-        this.width = this.size;
-        this.height = this.size;
-        this.mainContent.set_size(this.width, this.height);
-        this.shark.set_size(this.width, this.height);
-        this.wordBubble.set_size(this.width, this.height);
-        this.wordBubble.anchor_x = (this.width*0.63);
-        this.wordBubble.anchor_y = (this.height*0.63);
+        this.mainContent.set_size(this.size, this.size);
+        this.shark.set_size(this.size, this.size);
+        this.wordBubble.set_size(this.size, this.size);
+        this.wordBubble.anchor_x = (this.size*0.63);
+        this.wordBubble.anchor_y = (this.size*0.63);
         if(this.wavingHello)
         {
-            this.shark.setAnimation(this.animStash[this.color].hello);
-            this.wordBubble.setAnimation(this.animStash[this.color].bubble);
+            this.shark.setAnimation(this.animStash['white'].hello);
+            this.wordBubble.setAnimation(this.animStash['white'].bubble);
         }
         else
         {
-            this.shark.setAnimation(this.animStash[this.color].idle);
+            this.shark.setAnimation(this.animStash['white'].idle);
             this.wordBubble.setAnimation(null);
         }
     },

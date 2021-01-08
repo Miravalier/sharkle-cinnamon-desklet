@@ -1,12 +1,8 @@
 {
     "color": {
-        "type": "combobox",
-        "description": "Color",
+        "type": "colorchooser",
         "default": "white",
-        "options": {
-            "White": "white",
-            "Black": "black"
-        }
+        "description": "Color"
     },
     "size": {
         "type": "scale",
